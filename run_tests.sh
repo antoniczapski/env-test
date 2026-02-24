@@ -12,20 +12,10 @@ echo ""
 
 # ---- Check Python ---------------------------------------------------------
 PYTHON="${PYTHON:-python3}"
-echo "[1/3] Python: $($PYTHON --version 2>&1)"
-echo ""
-
-# ---- Install test dependencies (optional) ---------------------------------
-if [ "${SKIP_INSTALL:-0}" != "1" ]; then
-    echo "[2/3] Installing test dependencies …"
-    $PYTHON -m pip install --quiet -r requirements-test.txt
-    echo "      Done."
-else
-    echo "[2/3] Skipping dependency install (SKIP_INSTALL=1)"
-fi
+echo "[1/2] Python: $($PYTHON --version 2>&1)"
 echo ""
 
 # ---- Run tests -------------------------------------------------------------
-echo "[3/3] Running tests …"
+echo "[2/2] Running tests …"
 echo ""
 $PYTHON -m pytest tests/ -v --tb=short "$@"

@@ -27,6 +27,7 @@ Python **3.10+** (target: **3.13**)
 └── tests/
     ├── conftest.py             # shared fixtures (datasets)
     ├── test_imports.py         # import & version checks for every library
+    ├── test_numpy_pandas.py    # NumPy & pandas core + interop
     ├── test_sklearn.py         # scikit-learn core functionality
     ├── test_xgboost.py         # XGBoost native + sklearn API
     ├── test_lightgbm.py        # LightGBM native + sklearn API
@@ -47,22 +48,19 @@ cd env-test
 ### What the script does
 
 1. Prints the active Python version.
-2. Installs dependencies from `requirements-test.txt` (skip with `SKIP_INSTALL=1`).
-3. Runs `pytest tests/ -v --tb=short`.
+2. Runs `pytest tests/ -v --tb=short`.
+
+The script assumes the environment already has all required dependencies installed.
 
 ### Manual run (without the script)
 
 ```bash
-pip install -r requirements-test.txt
 python -m pytest tests/ -v --tb=short
 ```
 
 ### Options
 
 ```bash
-# Skip pip install (deps already present)
-SKIP_INSTALL=1 ./run_tests.sh
-
 # Use a specific Python
 PYTHON=/usr/bin/python3.13 ./run_tests.sh
 
@@ -77,6 +75,11 @@ PYTHON=/usr/bin/python3.13 ./run_tests.sh
 - Every library exposes a version string.
 - Python version ≥ 3.10.
 - NumPy ↔ pandas round-trip.
+
+### NumPy & pandas (`test_numpy_pandas.py`)
+- NumPy: array creation, dtypes, arithmetic, linear algebra, random, broadcasting.
+- pandas: DataFrame creation, Series ops, groupby, missing values, categoricals, merge.
+- Interop: array↔Series/DataFrame round-trips, dtype preservation, NaN handling, ufunc dispatch.
 
 ### scikit-learn (`test_sklearn.py`)
 - Classification (LogisticRegression, RandomForest, GradientBoosting).
