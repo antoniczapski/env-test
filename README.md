@@ -22,8 +22,8 @@ Python **3.10+** (target: **3.13**)
 ```
 .
 ├── README.md
-├── requirements-test.txt       # pip dependencies for the test suite
-├── run_tests.sh                # one-command test runner
+├── requirements-test.txt       # reference list of required packages (not auto-installed)
+├── run_tests.sh                # read-only test runner (never installs anything)
 └── tests/
     ├── conftest.py             # shared fixtures (datasets)
     ├── test_imports.py         # import & version checks for every library
@@ -45,12 +45,17 @@ cd env-test
 ./run_tests.sh
 ```
 
+> **Read-only:** The test runner does **not** install, upgrade, or remove any
+> packages. It only verifies that the environment already has the expected
+> setup. This makes it safe to run on any machine without side-effects.
+
 ### What the script does
 
-1. Prints the active Python version.
+1. Checks that Python and pytest are available.
 2. Runs `pytest tests/ -v --tb=short`.
 
-The script assumes the environment already has all required dependencies installed.
+All required dependencies (see `requirements-test.txt`) must already be
+installed in the target environment before running the tests.
 
 ### Manual run (without the script)
 

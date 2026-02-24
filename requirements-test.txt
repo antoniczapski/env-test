@@ -1,4 +1,6 @@
-# Minimal test dependencies
+# Reference list of required packages.
+# This file is NOT installed automatically by run_tests.sh.
+# It documents which packages the environment must already provide.
 pytest>=7.0
 numpy
 pandas
